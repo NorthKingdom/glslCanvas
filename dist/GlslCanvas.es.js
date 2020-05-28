@@ -482,10 +482,6 @@ function parseUniforms(uniforms) {
     return parsed;
 }
 
-function isCanvasVisible(canvas) {
-    return canvas.getBoundingClientRect().top + canvas.height > 0 && canvas.getBoundingClientRect().top < (window.innerHeight || document.documentElement.clientHeight);
-}
-
 function isPowerOf2(value) {
     return (value & value - 1) === 0;
 }
@@ -1001,6 +997,7 @@ var GlslCanvas = function () {
         this.vbo = {};
         this.isValid = false;
         this.animationFrameRequest = undefined;
+        this.isVisible = false;
 
         this.BUFFER_COUNT = 0;
         // this.TEXTURE_COUNT = 0;
@@ -1088,9 +1085,9 @@ var GlslCanvas = function () {
                 sandbox.setMouse(mouse);
             }
 
-            if (sandbox.resize()) {
-                sandbox.forceRender = true;
-            }
+            // if (sandbox.resize()) {
+            //     sandbox.forceRender = true;
+            // }
 
             sandbox.render();
             sandbox.animationFrameRequest = window.requestAnimationFrame(RenderLoop);
@@ -1261,6 +1258,11 @@ var GlslCanvas = function () {
             waitForTest();
         }
     }, {
+        key: 'setVisibility',
+        value: function setVisibility(isVisible) {
+            this.isVisible = isVisible;
+        }
+    }, {
         key: 'loadTexture',
         value: function loadTexture(name, urlElementOrData, options) {
             var _this2 = this;
@@ -1416,6 +1418,7 @@ var GlslCanvas = function () {
                 this.width = this.canvas.clientWidth;
                 this.height = this.canvas.clientHeight;
                 this.resizeSwappableBuffers();
+                this.forceRender = true;
                 return true;
             } else {
                 return false;
@@ -1424,8 +1427,8 @@ var GlslCanvas = function () {
     }, {
         key: 'render',
         value: function render() {
-            this.visible = isCanvasVisible(this.canvas);
-            if (this.forceRender || this.change || this.animated && this.visible && !this.paused) {
+            // this.visible = isCanvasVisible(this.canvas);
+            if (this.forceRender || this.change || this.animated && this.isVisible && !this.paused) {
 
                 // Update Uniforms when are need
                 var date = new Date();

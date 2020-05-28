@@ -56,6 +56,7 @@ export default class GlslCanvas {
         this.vbo = {};
         this.isValid = false;
         this.animationFrameRequest = undefined;
+        this.isVisible = false
 
         this.BUFFER_COUNT = 0;
         // this.TEXTURE_COUNT = 0;
@@ -169,9 +170,9 @@ void main(){
                 sandbox.setMouse(mouse);
             }
 
-            if (sandbox.resize()) {
-                sandbox.forceRender = true;
-            }
+            // if (sandbox.resize()) {
+            //     sandbox.forceRender = true;
+            // }
             
             sandbox.render();
             sandbox.animationFrameRequest = window.requestAnimationFrame(RenderLoop);
@@ -341,6 +342,10 @@ void main(){
         waitForTest();
     }
 
+    setVisibility(isVisible) {
+        this.isVisible = isVisible
+    }
+
     loadTexture (name, urlElementOrData, options) {
         if (!options) {
             options = {};
@@ -483,6 +488,7 @@ void main(){
             this.width = this.canvas.clientWidth;
             this.height = this.canvas.clientHeight;
             this.resizeSwappableBuffers();
+            this.forceRender = true;
             return true;
         } else {
             return false;
@@ -490,9 +496,9 @@ void main(){
     }
 
     render () {
-        this.visible = isCanvasVisible(this.canvas);
+        // this.visible = isCanvasVisible(this.canvas);
         if ( this.forceRender || this.change ||
-            (this.animated && this.visible && ! this.paused) ) {
+            (this.animated && this.isVisible && ! this.paused) ) {
 
             // Update Uniforms when are need
             let date = new Date();
