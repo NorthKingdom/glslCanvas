@@ -2065,22 +2065,9 @@ var GlslCanvas = function () {
     return GlslCanvas;
 }();
 
-function loadAllGlslCanvas() {
-    var list = document.getElementsByClassName('glslCanvas');
-    if (list.length > 0) {
-        window.glslCanvases = [];
-        for (var i = 0; i < list.length; i++) {
-            var sandbox = new GlslCanvas(list[i]);
-            if (sandbox.isValid) {
-                window.glslCanvases.push(sandbox);
-            }
-        }
-    }
-}
-
-window.addEventListener('load', function () {
-    loadAllGlslCanvas();
-});
+// window.addEventListener('load', function () {
+//     loadAllGlslCanvas();
+// });
 
 return GlslCanvas;
 

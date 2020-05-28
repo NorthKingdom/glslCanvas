@@ -717,6 +717,6 @@ function loadAllGlslCanvas() {
     }
 }
 
-window.addEventListener('load', function () {
-    loadAllGlslCanvas();
-});
+// window.addEventListener('load', function () {
+//     loadAllGlslCanvas();
+// });
