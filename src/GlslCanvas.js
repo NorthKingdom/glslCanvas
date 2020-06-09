@@ -159,10 +159,10 @@ void main(){
             x: 0,
             y: 0
         };
-        document.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX || e.pageX;
-            mouse.y = e.clientY || e.pageY;
-        }, false);
+        // document.addEventListener('mousemove', (e) => {
+        //     mouse.x = e.clientX || e.pageX;
+        //     mouse.y = e.clientY || e.pageY;
+        // }, false);
 
         let sandbox = this;
         function RenderLoop() {
@@ -170,9 +170,9 @@ void main(){
                 sandbox.setMouse(mouse);
             }
 
-            // if (sandbox.resize()) {
-            //     sandbox.forceRender = true;
-            // }
+            if (sandbox.resize()) {
+                sandbox.forceRender = true;
+            }
             
             sandbox.render();
             sandbox.animationFrameRequest = window.requestAnimationFrame(RenderLoop);
