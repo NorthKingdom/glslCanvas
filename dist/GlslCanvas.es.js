@@ -1085,9 +1085,9 @@ var GlslCanvas = function () {
                 sandbox.setMouse(mouse);
             }
 
-            if (sandbox.resize()) {
-                sandbox.forceRender = true;
-            }
+            // if (sandbox.resize()) {
+            //     sandbox.forceRender = true;
+            // }
 
             sandbox.render();
             sandbox.animationFrameRequest = window.requestAnimationFrame(RenderLoop);
