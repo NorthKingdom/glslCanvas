@@ -1425,6 +1425,28 @@ var GlslCanvas = function () {
             }
         }
     }, {
+        key: 'rescale',
+        value: function rescale() {
+            this.realToCSSPixels = window.devicePixelRatio || 1;
+
+            // Lookup the size the browser is displaying the canvas in CSS pixels
+            // and compute a size needed to make our drawingbuffer match it in
+            // device pixels.
+            var displayWidth = Math.floor(this.gl.canvas.clientWidth * this.realToCSSPixels);
+            var displayHeight = Math.floor(this.gl.canvas.clientHeight * this.realToCSSPixels);
+
+            // Check if the canvas is not the same size.
+            if (this.gl.canvas.width !== displayWidth || this.gl.canvas.height !== displayHeight) {
+                // Make the canvas the same size
+                this.gl.canvas.width = displayWidth;
+                this.gl.canvas.height = displayHeight;
+                // Set the viewport to match
+                this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
+            }
+            this.resizeSwappableBuffers();
+            this.forceRender = true;
+        }
+    }, {
         key: 'render',
         value: function render() {
             // this.visible = isCanvasVisible(this.canvas);
