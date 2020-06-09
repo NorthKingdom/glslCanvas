@@ -164,23 +164,9 @@ void main(){
             mouse.y = e.clientY || e.pageY;
         }, false);
 
-        let sandbox = this;
-        function RenderLoop() {
-            if (sandbox.nMouse > 1) {
-                sandbox.setMouse(mouse);
-            }
-
-            // if (sandbox.resize()) {
-            //     sandbox.forceRender = true;
-            // }
-            
-            sandbox.render();
-            sandbox.animationFrameRequest = window.requestAnimationFrame(RenderLoop);
-        }
-
         // Start
         this.setMouse({ x: 0, y: 0 });
-        RenderLoop();
+        // RenderLoop();
         return this;
     }
 
@@ -208,6 +194,28 @@ void main(){
 
         this.program = null;
         this.gl = null;
+    }
+
+    renderLoop() {
+        if (this.resize()) {
+            this.forceRender = true;
+        }
+        
+        this.render();
+        this.animationFrameRequest = window.requestAnimationFrame(this.renderLoop);
+    }
+
+    startRenderLoop() {
+        this.renderLoop()
+    }
+
+    stopRenderLoop() {
+        cancelAnimationFrame(this.animationFrameRequest);
+    }
+
+    forcedRender() {
+        this.forceRender = true;
+        this.render()
     }
 
     load (fragString, vertString) {
@@ -341,6 +349,8 @@ void main(){
         }
         waitForTest();
     }
+
+    
 
     setVisibility(isVisible) {
         this.isVisible = isVisible
@@ -496,9 +506,8 @@ void main(){
     }
 
     render () {
-        // this.visible = isCanvasVisible(this.canvas);
         if ( this.forceRender || this.change ||
-            (this.animated && this.isVisible && ! this.paused) ) {
+            (this.animated && ! this.paused) ) {
 
             // Update Uniforms when are need
             let date = new Date();
