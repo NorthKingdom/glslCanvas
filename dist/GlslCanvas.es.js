@@ -1076,13 +1076,7 @@ var GlslCanvas = function () {
 
         // Start
         this.setMouse({ x: 0, y: 0 });
-
-        // bindings
-        this.forcedRender = this.forcedRender.bind(this);
-        this.renderLoop = this.renderLoop.bind(this);
-        this.startRenderLoop = this.startRenderLoop.bind(this);
-        this.stopRenderLoop = this.stopRenderLoop.bind(this);
-
+        // RenderLoop();
         return this;
     }
 
