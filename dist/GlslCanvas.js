@@ -1515,9 +1515,9 @@ var GlslCanvas = function () {
     }, {
         key: 'renderLoop',
         value: function renderLoop() {
-            if (this.resize()) {
-                this.forceRender = true;
-            }
+            // if (this.resize()) {
+            //     this.forceRender = true;
+            // }
 
             this.render();
             this.animationFrameRequest = window.requestAnimationFrame(this.renderLoop);
@@ -1840,6 +1840,7 @@ var GlslCanvas = function () {
         key: 'render',
         value: function render() {
             if (this.forceRender || this.change || this.animated && !this.paused) {
+                console.log('render');
 
                 // Update Uniforms when are need
                 var date = new Date();
