@@ -196,28 +196,6 @@ void main(){
         this.gl = null;
     }
 
-    renderLoop() {
-        // if (this.resize()) {
-        //     this.forceRender = true;
-        // }
-        
-        this.render();
-        this.animationFrameRequest = window.requestAnimationFrame(this.renderLoop);
-    }
-
-    startRenderLoop() {
-        this.renderLoop()
-    }
-
-    stopRenderLoop() {
-        cancelAnimationFrame(this.animationFrameRequest);
-    }
-
-    forcedRender() {
-        this.forceRender = true;
-        this.render()
-    }
-
     load (fragString, vertString) {
 
         // Load vertex shader if there is one
@@ -551,6 +529,28 @@ void main(){
             this.change = false;
             this.forceRender = false;
         }
+    }
+
+    renderLoop() {
+        // if (this.resize()) {
+        //     this.forceRender = true;
+        // }
+        
+        this.render();
+        this.animationFrameRequest = window.requestAnimationFrame(this.renderLoop);
+    }
+
+    startRenderLoop() {
+        this.renderLoop()
+    }
+
+    stopRenderLoop() {
+        cancelAnimationFrame(this.animationFrameRequest);
+    }
+
+    forcedRender() {
+        this.forceRender = true;
+        this.render()
     }
 
     pause () {

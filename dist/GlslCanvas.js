@@ -1513,32 +1513,6 @@ var GlslCanvas = function () {
             this.gl = null;
         }
     }, {
-        key: 'renderLoop',
-        value: function renderLoop() {
-            // if (this.resize()) {
-            //     this.forceRender = true;
-            // }
-
-            this.render();
-            this.animationFrameRequest = window.requestAnimationFrame(this.renderLoop);
-        }
-    }, {
-        key: 'startRenderLoop',
-        value: function startRenderLoop() {
-            this.renderLoop();
-        }
-    }, {
-        key: 'stopRenderLoop',
-        value: function stopRenderLoop() {
-            cancelAnimationFrame(this.animationFrameRequest);
-        }
-    }, {
-        key: 'forcedRender',
-        value: function forcedRender() {
-            this.forceRender = true;
-            this.render();
-        }
-    }, {
         key: 'load',
         value: function load(fragString, vertString) {
 
@@ -1883,6 +1857,32 @@ var GlslCanvas = function () {
                 this.change = false;
                 this.forceRender = false;
             }
+        }
+    }, {
+        key: 'renderLoop',
+        value: function renderLoop() {
+            // if (this.resize()) {
+            //     this.forceRender = true;
+            // }
+
+            this.render();
+            this.animationFrameRequest = window.requestAnimationFrame(this.renderLoop);
+        }
+    }, {
+        key: 'startRenderLoop',
+        value: function startRenderLoop() {
+            this.renderLoop();
+        }
+    }, {
+        key: 'stopRenderLoop',
+        value: function stopRenderLoop() {
+            cancelAnimationFrame(this.animationFrameRequest);
+        }
+    }, {
+        key: 'forcedRender',
+        value: function forcedRender() {
+            this.forceRender = true;
+            this.render();
         }
     }, {
         key: 'pause',
