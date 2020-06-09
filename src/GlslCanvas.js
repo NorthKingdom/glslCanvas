@@ -197,9 +197,9 @@ void main(){
     }
 
     renderLoop() {
-        // if (this.resize()) {
-        //     this.forceRender = true;
-        // }
+        if (this.resize()) {
+            this.forceRender = true;
+        }
         
         this.render();
         this.animationFrameRequest = window.requestAnimationFrame(this.renderLoop);
@@ -508,7 +508,6 @@ void main(){
     render () {
         if ( this.forceRender || this.change ||
             (this.animated && ! this.paused) ) {
-            console.log('render')
 
             // Update Uniforms when are need
             let date = new Date();
